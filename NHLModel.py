@@ -471,15 +471,14 @@ for i, row in season_results_df.iterrows():
         season_results_df['Visitor_Special_Teams_Index'] = season_results_df['Visitor_PP%'] + season_results_df['Visitor_PK%']
 
 load_dotenv()  
-cloudcube_url = urlparse(os.getenv('CLOUDCUBE_URL'))     
-bucket_name = cloudcube_url.netloc.split('.')[0]
-base_path = cloudcube_url.path.lstrip('/')
+cloudcube_base_path = 'moygkytojg0o'
+bucket_name='cloud-cube-us2'
 
 s3_client = boto3.client(
-    's3',
-    aws_access_key_id=os.getenv('CLOUDCUBE_ACCESS_KEY_ID'),
-    aws_secret_access_key=os.getenv('CLOUDCUBE_SECRET_ACCESS_KEY'),
-    region_name='us-east-1'
+'s3',
+aws_access_key_id=os.getenv('CLOUDCUBE_ACCESS_KEY_ID'),
+aws_secret_access_key=os.getenv('CLOUDCUBE_SECRET_ACCESS_KEY'),
+region_name='us-east-1'
 )
 
 print(season_results_df.columns)
@@ -530,8 +529,8 @@ team_stats_file = io.BytesIO()
 pickle.dump(season_results_df, team_stats_file)
 team_stats_file.seek(0)
 
-model_key = f"{base_path}/model.pkl"
-team_stats_key = f"{base_path}/team_stats.pkl"
+model_key = f"{cloudcube_base_path}/model.pkl"
+team_stats_key = f"{cloudcube_base_path}/team_stats.pkl"
 
 s3_client.upload_fileobj(model_file, bucket_name, model_key)
 s3_client.upload_fileobj(team_stats_file, bucket_name, team_stats_key)
