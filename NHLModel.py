@@ -477,8 +477,8 @@ base_path = cloudcube_url.path.lstrip('/')
 
 s3_client = boto3.client(
     's3',
-    aws_access_key_id=cloudcube_url.username,
-    aws_secret_access_key=cloudcube_url.password,
+    aws_access_key_id=os.getenv('CLOUDCUBE_ACCESS_KEY_ID'),
+    aws_secret_access_key=os.getenv('CLOUDCUBE_SECRET_ACCESS_KEY'),
     region_name='us-east-1'
 )
 
