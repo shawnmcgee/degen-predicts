@@ -7,15 +7,39 @@ from dotenv import load_dotenv
 import pickle
 from OddsAPICall import OddsAPICall
 from NHLGoalsPredictor import NHLGoalsPredictor
+import boto3
+from io import BytesIO
+from urllib.parse import urlparse
 
 sys.path.append('.')
-def load_model(model_path):
-    with open(model_path, 'rb') as f:
-        return pickle.load(f)
+
+load_dotenv()
+
+cloudcube_url = urlparse(os.getenv('CLOUDCUBE_URL'))
+bucket_name = cloudcube_url.netloc.split('.')[0]
+base_path = cloudcube_url.path.lstrip('/')
+
+s3_client = boto3.client(
+    's3',
+    aws_access_key_id = cloudcube_url.username,
+    aws_secret_access_key = cloudcube_url.password,
+    region_name = 'us-east-1'
+)
+
+def download_object_from_s3(bucket, key):
+    "Download an object from S3 to a BytesIO buffer."""
+    buffer = BytesIO()
+    s3_client.download_fileobj(Bucket=bucket, Key=key, Fileobj=buffer)
+    buffer.seek(0)
+    return buffer
+
+def load_model(model_key):
+    model_buffer = download_object_from_s3(bucket_name, model_key)
+    return pickle.load(model_buffer)
     
-def load_team_stats(team_stats_path):
-    with open(team_stats_path, 'rb') as f:
-        return pickle.load(f)
+def load_team_stats(team_stats_key):
+    team_stats_buffer = download_object_from_s3(bucket_name, team_stats_key)
+    return pickle.load(team_stats_buffer)
     
 def create_app():
     app = Flask(__name__)
@@ -26,10 +50,11 @@ def create_app():
     api_key=os.getenv('ODDS_API_KEY')
     api_client = OddsAPICall(api_key)
 
-    model_path = os.path.join('SavedModel', 'model.pkl')
-    team_stats_path = os.path.join('SavedModel', 'team_stats.pkl')
-    model = load_model(model_path) 
-    team_stats = load_team_stats(team_stats_path)
+    model_key = f"{base_path}/model.pkl"
+    team_stats_key = f"{base_path}/team_stats.pkl"
+
+    model = load_model(model_key)
+    team_stats = load_team_stats(team_stats_key)
     model_predictor = NHLGoalsPredictor(model, team_stats)
     
     import views
