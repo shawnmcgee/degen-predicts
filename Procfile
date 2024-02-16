@@ -1,1 +1,1 @@
-web: gunicorn degen-predicts.wsgi:app
+web: gunicorn wsgi:app
