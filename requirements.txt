@@ -9,3 +9,5 @@ beautifulsoup4
 numpy
 tqdm
 boto3
+lxml==5.1.0
+pyarrow==15.0.0
