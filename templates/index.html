@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Upcoming NHL Games</h1>
+    {% for game in games %}
+    <div class="row game-info mb-3">
+        <!-- Team 1 Column -->
+        <div class="team-info">
+            <img src="{{ game.team1_logo }}" alt="{{ game.home_team }}" class="team-logo">
+        </div>
+
+        <!-- VS and Game Time Column -->
+        <div class="col-md-2 text-center vs-column">
+            <div>Line Total (BO): {{ game.odds[0].point }}</div> <!-- Assuming there is at least one odd -->
+            <div>Predicted Total Goals: {{ game.predicted_total_goals }}</div>
+            <div class="game-time">{{ game.game_time }}</div>
+            <div class="vs-indicator">VS</div>
+        </div>
+
+        <!-- Team 2 Column -->
+        <div class="team-info">
+            <img src="{{ game.team2_logo }}" alt="{{ game.away_team }}" class="team-logo2">
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='content/site.css') }}" /> <!-- Ensure the CSS file path is correct -->
+    <!-- Add any additional CSS or JS you need here -->
+</head>
+<body>
+    <div class="form" autocomplete="off">
+        <div class="control">
+            <h1>Sign In</h1>
+        </div>
+        <form action="/login" method="post">
+            <div class="control block-cube block-input">
+                <input type="text" name="username" placeholder="Username" required />
+                <div class="bg-top">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg-right">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg">
+                    <div class="bg-inner"></div>
+                </div>
+            </div>
+            <div class="control block-cube block-input">
+                <input type="password" name="password" placeholder="Password" required />
+                <div class="bg-top">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg-right">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg">
+                    <div class="bg-inner"></div>
+                </div>
+            </div>
+            <button type="submit" class="btn block-cube block-cube-hover">
+                <div class="bg-top">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg-right">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="text">Log In</div>
+            </button>
+        </form>
+    </div>
+</body>
+</html>
