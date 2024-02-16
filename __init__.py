@@ -9,27 +9,23 @@ from OddsAPICall import OddsAPICall
 from NHLGoalsPredictor import NHLGoalsPredictor
 import boto3
 from io import BytesIO
-from urllib.parse import urlparse
-
-sys.path.append('.')
 
 load_dotenv()
 
-cloudcube_url = urlparse(os.getenv('CLOUDCUBE_URL'))
-bucket_name = cloudcube_url.netloc.split('.')[0]
-base_path = cloudcube_url.path.lstrip('/')
-
 s3_client = boto3.client(
     's3',
-    aws_access_key_id = cloudcube_url.username,
-    aws_secret_access_key = cloudcube_url.password,
+    aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID'),
+    aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY'),
     region_name = 'us-east-1'
 )
+
+cloudcube_base_path = 'moygkytojg0o'
+bucket_name = 'cloud-cube-us2'
 
 def download_object_from_s3(bucket, key):
     "Download an object from S3 to a BytesIO buffer."""
     buffer = BytesIO()
-    s3_client.download_fileobj(Bucket=bucket, Key=key, Fileobj=buffer)
+    s3_client.download_fileobj(Bucket=bucket_name, Key=key, Fileobj=buffer)
     buffer.seek(0)
     return buffer
 
@@ -46,12 +42,11 @@ def create_app():
     app.secret_key = os.urandom(16)
     
     # Initializes API client and model
-    load_dotenv()
     api_key=os.getenv('ODDS_API_KEY')
     api_client = OddsAPICall(api_key)
 
-    model_key = f"{base_path}/model.pkl"
-    team_stats_key = f"{base_path}/team_stats.pkl"
+    model_key = f"{cloudcube_base_path}/model.pkl"
+    team_stats_key = f"{cloudcube_base_path}/team_stats.pkl"
 
     model = load_model(model_key)
     team_stats = load_team_stats(team_stats_key)
