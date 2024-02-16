@@ -1,1 +1,1 @@
-web: gunicorn NHLOverUnderWebApp.wsgi:app
+web: gunicorn degen-predicts.wsgi:app

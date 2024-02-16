@@ -5,8 +5,8 @@ import os
 print(os.getcwd())
 from dotenv import load_dotenv
 import pickle
-from NHLOverUnderWeb.OddsAPICall import OddsAPICall
-from NHLOverUnderWeb.NHLGoalsPredictor import NHLGoalsPredictor
+from OddsAPICall import OddsAPICall
+from NHLGoalsPredictor import NHLGoalsPredictor
 
 sys.path.append('.')
 def load_model(model_path):
