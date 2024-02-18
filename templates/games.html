@@ -1,38 +1,23 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div id="includedContent">
+<div class="games-container">
     {% for game in games %}
-    <table border="0" align="center">
-        <tbody>
-            <tr>
-                <td align="center">
-                    <h3><b></b></h3>
-                </td>
-                <td align="center">
-                    <img src="{{ game.team1_logo }}" alt="{{ game.home_team }}" class="team-logo" alt="MONTREAL CANADIENS">
-                </td>
-                <td align="center">
-                    <h3>
-                        <div class="col-md-2 text-center vs-column">
-                            <div>Line Total (BO): {{ game.odds[0].point }}</div> <!-- Assuming there is at least one odd -->
-                            <div>Predicted Total Goals: {{ game.predicted_total_goals }}</div>
-                            <div class="game-time">{{ game.game_time }}</div>
-                            <div class="vs-indicator">VS</div>
-                        </div>
-                    </h3>
-                    <h4>
-                    </h4>
-                </td>
-                <td align="center">
-                    <img src="{{ game.team2_logo }}" alt="{{ game.away_team }}" class="team-logo2" alt="CAROLINA HURRICANES">
-                </td>
-                <td align="center">
-                    <h3><b></b></h3>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="game-card">
+        <div class="team">
+            <img src="{{ game.team1_logo }}" alt="{{ game.home_team }}" class="team-logo">
+            <span class="team-name">{{ game.home_team }}</span>
+        </div>
+        <div class="game-details">
+            <div class="line-total">Line Total ({{game.bookmaker}}): {{ game.odds[0].point }}</div>
+            <div class="predicted-total">Predicted Total Goals: {{ game.predicted_total_goals }}</div>
+            <div class="game-time">{{ game.game_time }}</div>
+        </div>
+        <div class="team">
+            <img src="{{ game.team2_logo }}" alt="{{ game.away_team }}" class="team-logo">
+            <span class="team-name">{{ game.away_team }}</span>
+        </div>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

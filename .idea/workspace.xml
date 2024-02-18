@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="59ab6f58-99e7-4d1a-aa56-82afd2682a97" name="Changes" comment="Update run_model and NHLModel to use proper creds/var for cloudcube">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OddsAPICall.py" beforeDir="false" afterPath="$PROJECT_DIR$/OddsAPICall.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/content/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/content/site.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/games.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/games.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +19,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -34,12 +44,12 @@
     "Python.runserver.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "develop",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/mcgee/PycharmProjects/degen-predicts"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.NHLModel">
+  <component name="RunManager" selected="Python.runserver">
     <configuration name="NHLModel" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="degen-predicts" />
       <option name="ENV_FILES" value="" />
@@ -108,9 +118,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.runserver" />
         <item itemvalue="Python.NHLModel" />
         <item itemvalue="Python.run_model" />
-        <item itemvalue="Python.runserver" />
       </list>
     </recent_temporary>
   </component>

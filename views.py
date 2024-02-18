@@ -41,7 +41,7 @@ def show_games():
     # Your existing code for showing games
     api_client = current_app.config['API_CLIENT']
     model_predictor = current_app.config['MODEL_PREDICTOR']
-    games = api_client.fetch_odds("icehockey_nhl", "us", "totals", "betonlineag")
+    games = api_client.fetch_odds("icehockey_nhl", "us", "totals", "betonlineag", fallback_bookmaker="betus")
     if games:
         parsed_games = api_client.parse_games(games)
 
@@ -51,6 +51,7 @@ def show_games():
             game["predicted_total_goals"] = prediction
             game["team1_logo"] = url_for('static', filename=TEAM_LOGOS.get(game["home_team"], "Default_logo.png")) 
             game["team2_logo"] = url_for('static', filename=TEAM_LOGOS.get(game["away_team"], "default_logo.png"))
+            game["game_time"] = game["commence_time"]
 
         return render_template('games.html', games=parsed_games)
     else:
